@@ -3,7 +3,7 @@
 
 **EN-us**
 
-Project carried out at Magna with the aim of exploring and expanding knowledge in java
+Project carried with the aim of exploring and expanding knowledge in java
 
 
 
@@ -22,7 +22,7 @@ Unit tests were used in the application
 **PT-br**
 
 
-  Projeto realizado na Magna com objetivo de explorar e ampliar conhecimentos em java
+  Projeto realizado com objetivo de explorar e ampliar conhecimentos em java
 
 
 
