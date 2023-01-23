@@ -1,0 +1,2 @@
+Banco do Brasil,BB,00.000.000/0001-91,84597,1.4E10,MicroEmpresa,PUBLICO,false,true,João VI de Portugal,Fausto de Andrade Ribeiro,Brasilia,736000000,3876000,
+Banco Central do Brasil,Banco Central,00.038.166/0001-05,14736,4.696E11,MicroEmpresa,PUBLICO,false,true,Banco do Brasil,Roberto Campos Neto,Brasilia,1820000000,382000,
