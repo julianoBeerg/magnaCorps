@@ -34,7 +34,7 @@ public abstract class Corporacao implements AutenticaCNPJ {
 
 	// Método para validar se o tipo é público ou privado se for privado verifica se
 	// é multinacional ou não
-	protected String verificaTipo(String tipo) throws TratamentoException {
+	public String verificaTipo(String tipo) throws TratamentoException {
 
 		@SuppressWarnings("resource")
 		Scanner scan = new Scanner(System.in);
@@ -172,11 +172,11 @@ public abstract class Corporacao implements AutenticaCNPJ {
 		this.tipo = tipo;
 	}
 
-	protected Boolean getMultinacional() {
+	public Boolean getMultinacional() {
 		return multinacional;
 	}
 
-	protected void setMultinacional(Boolean multinacional) {
+	public void setMultinacional(Boolean multinacional) {
 		this.multinacional = multinacional;
 	}
 
@@ -184,7 +184,7 @@ public abstract class Corporacao implements AutenticaCNPJ {
 		return finsLucrativos;
 	}
 
-	protected void setFinsLucrativos(Boolean finsLucrativos) {
+	public void setFinsLucrativos(Boolean finsLucrativos) {
 		this.finsLucrativos = finsLucrativos;
 	}
 

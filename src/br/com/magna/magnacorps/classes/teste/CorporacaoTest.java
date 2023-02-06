@@ -21,8 +21,20 @@ public class CorporacaoTest {
 	}
 
 	@Test
-	public void verificaSePorteRetornaEnumCorreto() {
-		Corporacao corporacao = new Corporacao(null, null, null, 10, 10.0, null, null, null, null) {
+	public void verificaSePorteRetornaEnumMicroEmpreendedor() {
+		Corporacao corporacao = new Corporacao(null, null, null, 1, 10.0, null, null, null, null) {
+			@Override
+			public void verificaFinsLucrativos() {
+			}
+		};
+
+		Porte porte = corporacao.enumPorte();
+		Assert.assertEquals(porte, Porte.MicroEmpreendedor);
+	}
+
+	@Test
+	public void verificaSePorteRetornaEnumMicroEmpresa() {
+		Corporacao corporacao = new Corporacao(null, null, null, 10, 350.001, null, null, null, null) {
 			@Override
 			public void verificaFinsLucrativos() {
 			}
@@ -30,6 +42,29 @@ public class CorporacaoTest {
 
 		Porte porte = corporacao.enumPorte();
 		Assert.assertEquals(porte, Porte.MicroEmpresa);
+	}
+
+	@Test
+	public void verificaSePorteRetornaEnumPequenoPorte() {
+		Corporacao corporacao = new Corporacao(null, null, null, 101, 360.001, null, null, null, null) {
+			@Override
+			public void verificaFinsLucrativos() {
+			}
+		};
+
+		Porte porte = corporacao.enumPorte();
+		Assert.assertEquals(porte, Porte.EmpresaPequenoPorte);
+	}
+
+	@Test
+	public void VerificaTipo() throws TratamentoException {
+		Corporacao corporacao = new Corporacao(null, null, null, null, null, null, null, null, null) {
+			@Override
+			public void verificaFinsLucrativos() {
+			}
+		};
+		corporacao.verificaTipo("PUBLICO");
+		Assert.assertEquals(false, corporacao.getMultinacional());
 	}
 
 }

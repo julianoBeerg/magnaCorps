@@ -78,7 +78,7 @@ public class Economica extends Instituicao {
 		try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), "UTF-8"))) {
 			String line = br.readLine();
 
-			// Lê cada linha e adciona na list
+			// Lê cada linha e adiciona na list
 			while (line != null) {
 				String[] vect = line.split(",");
 				String nome = vect[0];
