@@ -1,17 +1,15 @@
 package br.com.magna.magnacorps.classes.associacao;
 
 import java.util.Scanner;
-
 import br.com.magna.magnacorps.classes.Corporacao;
 import br.com.magna.magnacorps.interfaces.Porte;
-import br.com.magna.magnacorps.main.TratamentoException;
 
 public class Associacao extends Corporacao {
 
-	String fundador;
-	Integer arrecadacao;
+	protected String fundador;
+	protected Integer arrecadacao;
 
-	public Associacao(String nome, String nomeFantasia, String cnpj, Integer numFuncionarios, Double faturamento,
+	protected Associacao(String nome, String nomeFantasia, String cnpj, Integer numFuncionarios, Double faturamento,
 			Porte porte, String tipo, Boolean multinacional, Boolean finsLucrativos, String fundador,
 			Integer arrecadacao) {
 		super(nome, nomeFantasia, cnpj, numFuncionarios, faturamento, porte, tipo, multinacional, finsLucrativos);
@@ -20,7 +18,7 @@ public class Associacao extends Corporacao {
 	}
 
 	// Método para fundar Instituicão a partir do metodo feito na classe corporação
-	public String fundarCorporacaoAssociacao() throws Exception {
+	protected String fundarCorporacaoAssociacao() {
 		fundarCorporacao();
 		@SuppressWarnings("resource")
 		Scanner scan = new Scanner(System.in);
@@ -28,37 +26,34 @@ public class Associacao extends Corporacao {
 		System.out.print("Digite o nome do fundador: ");
 		this.fundador = scan.nextLine();
 
-		try {
-			System.out.print("Digite o valor de arrecadação (Apenas números): ");
-			this.arrecadacao = scan.nextInt();
-		} catch (Exception e) {
-			throw new TratamentoException("O Tipo deve ser númerico");
-		}
+		System.out.print("Digite o valor de arrecadação (Apenas números): ");
+		this.arrecadacao = scan.nextInt();
+
 		return nome;
 	}
 
 	// Metodo sobrescrito, ja informando valor pois toda Instituição tem fins
 	// lucrativos
 	@Override
-	public void verificaFinsLucrativos() {
+	protected void verificaFinsLucrativos() {
 		getFinsLucrativos();
 		setFinsLucrativos(false);
 	}
 
 	// Abaixo Apenas getters e setters
-	public String getFundador() {
+	protected String getFundador() {
 		return fundador;
 	}
 
-	public void setFundador(String fundador) {
+	protected void setFundador(String fundador) {
 		this.fundador = fundador;
 	}
 
-	public Integer getArrecadacao() {
+	protected Integer getArrecadacao() {
 		return arrecadacao;
 	}
 
-	public void setArrecadacao(Integer arrecadacao) {
+	protected void setArrecadacao(Integer arrecadacao) {
 		this.arrecadacao = arrecadacao;
 	}
 }

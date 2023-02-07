@@ -1,0 +1,6 @@
+teste,teste,123456789987654,321,123.0,MicroEmpresa,PUBLICO,false,false,teste,123,teste,C:\dev\csvArchives\Sociedade\CorporacaoSociedadeLimitadaColetiva.txt,
+teste,teste,123456789987654,125,515.0,MicroEmpresa,PUBLICO,false,false,teste,454,teste,C:\dev\csvArchives\Sociedade\CorporacaoSociedadeLimitadaColetiva.txt,
+teste,teste,181818181818118181,151,818.0,MicroEmpresa,PUBLICO,false,false,1681,181,81,teste,
+teste,teste,123456987897654,181,151.0,MicroEmpresa,PUBLICO,false,false,1681,51851,51,C:\dev\csvArchives\Sociedade\CorporacaoSociedadeLimitadaColetiva.txt,
+teste,teste,123456789987654,51,51.0,MicroEmpresa,PUBLICO,false,false,teste,115,,C:\dev\csvArchives\Sociedade\CorporacaoSociedadeLimitadaColetiva.txt,
+teste,teste,321654987879654,51,51.0,MicroEmpresa,PUBLICO,false,false,teste,115,wufdf,wfowfj,

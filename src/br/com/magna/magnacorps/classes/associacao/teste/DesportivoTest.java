@@ -25,8 +25,8 @@ public class DesportivoTest {
 	}
 
 	@Test
-	public void verificaInputCorporacaoAssociacaoDesportivo() throws Exception {
-		List<Desportivo> list = new ArrayList<Desportivo>();
+	public void verificaInputCorporacaoAssociacaoDesportivo() {
+		List<Desportivo> list = new ArrayList<>();
 		String path = "C:\\dev\\csvArchives\\Insituicao\\CorporacaoAssociacaoSocial.txt";
 
 		Desportivo desportivo = new Desportivo(path, path, path, 0, 0.0, null, path, null, null, path, null, null,
@@ -38,7 +38,7 @@ public class DesportivoTest {
 
 	@Test
 	public void verificaOutputCorporacaoAssociacaoDesportivo() throws Exception {
-		List<Desportivo> list = new ArrayList<Desportivo>();
+		List<Desportivo> list = new ArrayList<>();
 		String path = "C:\\dev\\csvArchives\\Insituicao\\CorporacaoAssociacaoDesportivo.txt";
 
 		Desportivo desportivo = new Desportivo(path, path, path, 0, 0.0, null, path, null, null, path, null, null,

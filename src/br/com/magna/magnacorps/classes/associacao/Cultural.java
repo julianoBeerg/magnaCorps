@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -31,24 +32,16 @@ public class Cultural extends Associacao {
 	// Método que utiliza metodo da classe Instituição para criar um objeto do tipo:
 	// (Corporação > Instituição > Familiar)
 	// Não pode ser instaciado direto na Main
-	@SuppressWarnings("resource")
-	public String fundarCorporacaoAssociacaoCultural() throws Exception, TratamentoException {
+
+	public String fundarCorporacaoAssociacaoCultural() {
 		fundarCorporacaoAssociacao();
 		Scanner scan = new Scanner(System.in);
-		
-		try {
-			System.out.print("Digite a quantidade de ativos (Apenas números): ");
-			this.ativos = scan.nextDouble();
-		} catch (Exception e) {
-			throw new TratamentoException("O tipo deve ser númerico");
-		}
 
-		try {
-			System.out.print("Digite a quantidade de voluntários (Apenas números): ");
-			this.voluntarios = scan.nextInt();
-		} catch (Exception e) {
-			throw new TratamentoException("O tipo deve ser númerico");
-		}
+		System.out.print("Digite a quantidade de ativos (Apenas números): ");
+		this.ativos = scan.nextDouble();
+
+		System.out.print("Digite a quantidade de voluntários (Apenas números): ");
+		this.voluntarios = scan.nextInt();
 
 		System.out.println("\nCadastro Realizado com Sucesso !\n\n");
 
@@ -69,12 +62,13 @@ public class Cultural extends Associacao {
 
 	// Método de input para ler arquivos CSV
 	public void inputCorporacaoAssociacaoCultural() throws IOException, TratamentoException {
-		List<Cultural> list = new ArrayList<Cultural>();
+		List<Cultural> list = new ArrayList<>();
 
-		String path = "C:\\dev\\csvArchives\\Associacao\\CorporacaoAssociacaoCultural.txt";
+		String path = "src\\br\\com\\magna\\magnacorps\\arquivoscsv\\Associacao\\CorporacaoAssociacaoCultural.txt";
 
 		// Criando reader e utilizando padrão UTF-8
-		try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), "UTF-8"))) {
+		try (BufferedReader br = new BufferedReader(
+				new InputStreamReader(new FileInputStream(path), StandardCharsets.UTF_8))) {
 			String line = br.readLine();
 
 			// Lê cada linha e adciona na list
@@ -92,8 +86,8 @@ public class Cultural extends Associacao {
 				Boolean finsLucrativos = Boolean.parseBoolean(vect[8]);
 				String fundador = vect[9];
 				Integer arrecadacao = Integer.parseInt(vect[10]);
-				Double ativos = Double.parseDouble(vect[11]);
-				Integer voluntarios = Integer.parseInt(vect[12]);
+				ativos = Double.parseDouble(vect[11]);
+				voluntarios = Integer.parseInt(vect[12]);
 
 				Cultural cultural = new Cultural(nome, nomeFantasia, cnpj, numFuncionarios, faturamento, getPorte(),
 						tipo, multinacional, finsLucrativos, fundador, arrecadacao, ativos, voluntarios);
@@ -105,7 +99,7 @@ public class Cultural extends Associacao {
 			// loop que imprima linha a linha utilizando
 			System.out.println("Corparação Associação Cultural: \n");
 
-			if (list.isEmpty() != true) {
+			if (!list.isEmpty()) {
 				for (Cultural f : list) {
 					System.out.println(f + "\n");
 				}
@@ -119,10 +113,10 @@ public class Cultural extends Associacao {
 	}
 
 	// Output para escrita dos objetos no CSV
-	public void outputCorporacaoAssociacaoCultural() throws Exception {
-		List<Cultural> list = new ArrayList<Cultural>();
+	public void outputCorporacaoAssociacaoCultural() throws IOException {
+		List<Cultural> list = new ArrayList<>();
 
-		String path = "C:\\dev\\csvArchives\\Associacao\\CorporacaoAssociacaoCultural.txt";
+		String path = "src\\br\\com\\magna\\magnacorps\\arquivoscsv\\Associacao\\CorporacaoAssociacaoCultural.txt";
 
 		Cultural cultural1 = new Cultural(path, path, path, voluntarios, ativos, porte, path, getMultinacional(),
 				getFinsLucrativos(), path, voluntarios, ativos, voluntarios);
@@ -132,7 +126,7 @@ public class Cultural extends Associacao {
 		list.add(cultural1);
 
 		try (BufferedWriter out = new BufferedWriter(
-				new OutputStreamWriter(new FileOutputStream(path, true), "UTF-8"))) {
+				new OutputStreamWriter(new FileOutputStream(path, true), StandardCharsets.UTF_8))) {
 
 			for (Cultural cultural : list) {
 				out.append(cultural.getNome());
@@ -176,10 +170,8 @@ public class Cultural extends Associacao {
 				out.append('\n');
 			}
 			out.flush();
-			out.close();
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

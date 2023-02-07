@@ -1,0 +1,2 @@
+Universidade Nove de Julho,Uninove,43.374.768/0001-38,10001,1.8E8,MicroEmpresa,PRIVADO,false,true,José Storópoli,Eduardo Storópoli,São,Ensino Superior,150000,
+Universidade São Paulo,USP,63.025.530/0001-04,13368,0.0,MicroEmpresa,PUBLICO,false,true,Armando de Salles Oliveira,Carlos Gilberto Carlotti Júnior,São,Ensino Superior,97325,

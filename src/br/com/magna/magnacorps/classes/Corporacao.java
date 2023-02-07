@@ -3,22 +3,21 @@ package br.com.magna.magnacorps.classes;
 import java.util.Scanner;
 import br.com.magna.magnacorps.interfaces.AutenticaCNPJ;
 import br.com.magna.magnacorps.interfaces.Porte;
-import br.com.magna.magnacorps.main.TratamentoException;
 
 public abstract class Corporacao implements AutenticaCNPJ {
 
 	protected String nome;
-	private String nomeFantasia;
-	private String cnpj;
+	protected String nomeFantasia;
+	protected String cnpj;
 	protected Integer numFuncionarios;
-	private Double faturamento;
+	protected Double faturamento;
 	protected Porte porte;
-	private String tipo;
-	private Boolean multinacional;
-	private Boolean finsLucrativos;
+	protected String tipo;
+	protected Boolean multinacional;
+	protected Boolean finsLucrativos;
 
 	// Construtor
-	public Corporacao(String nome, String nomeFantasia, String cnpj, Integer numFuncionarios, Double faturamento,
+	protected Corporacao(String nome, String nomeFantasia, String cnpj, Integer numFuncionarios, Double faturamento,
 			Porte porte, String tipo, Boolean multinacional, Boolean finsLucrativos) {
 		super();
 		this.nome = nome;
@@ -34,7 +33,7 @@ public abstract class Corporacao implements AutenticaCNPJ {
 
 	// Método para validar se o tipo é público ou privado se for privado verifica se
 	// é multinacional ou não
-	public String verificaTipo(String tipo) throws TratamentoException {
+	public String verificaTipo(String tipo) {
 
 		@SuppressWarnings("resource")
 		Scanner scan = new Scanner(System.in);
@@ -48,7 +47,7 @@ public abstract class Corporacao implements AutenticaCNPJ {
 			} else if (verifica.contains("NÃO") || verifica.contains("NAO"))
 				multinacional = false;
 		} else {
-			throw new TratamentoException("Uma corporação só pode ser pública ou privada");
+			System.out.println("Uma corporação só pode ser pública ou privada");
 		}
 		return nome;
 	}
@@ -56,16 +55,16 @@ public abstract class Corporacao implements AutenticaCNPJ {
 	// Método que verifica se o CNPJ tem entre 14 e 17 caracteres (podendo ser
 	// escrito de forma númerica ou com as pontuações)
 	@Override
-	public String autentica(String cnpj) throws TratamentoException {
+	public String autentica(String cnpj) {
 		while (cnpj.length() < 14 || cnpj.length() > 18) {
-			throw new TratamentoException("O CNPJ deve conter 14 ou 17 números, preencha o cadastro novamente");
+			System.out.println("O CNPJ deve conter 14 ou 17 números, preencha o cadastro novamente");
 		}
 		return cnpj;
 	}
 
 	// Método utilizado para captar as informações no console e posteriormente fazer
 	// o output no arquivo CSV
-	public void fundarCorporacao() throws TratamentoException {
+	public void fundarCorporacao() {
 		@SuppressWarnings("resource")
 		Scanner scan = new Scanner(System.in);
 
@@ -79,27 +78,16 @@ public abstract class Corporacao implements AutenticaCNPJ {
 		cnpj = scan.next();
 		autentica(cnpj);
 
-		try {
-			System.out.print("Digite número de funcionarios (Apenas números): ");
-			this.numFuncionarios = scan.nextInt();
-		} catch (Exception e) {
-			throw new TratamentoException("O Tipo deve ser númerico");
-		}
+		System.out.print("Digite número de funcionarios (Apenas números): ");
+		this.numFuncionarios = scan.nextInt();
 
-		try {
-			System.out.print("Digite faturamento (Apenas números): ");
-			this.faturamento = scan.nextDouble();
-		} catch (Exception e) {
-			throw new TratamentoException("O Tipo deve ser númerico");
-		}
+		System.out.print("Digite faturamento (Apenas números): ");
+		this.faturamento = scan.nextDouble();
 
-		try {
-			System.out.print("Digite tipo (PUBLICO ou PRIVADO): ");
-			tipo = scan.next().toUpperCase();
-			verificaTipo(tipo);
-		} catch (Exception e) {
-			throw new TratamentoException("Uma corporação só pode ser pública ou privada");
-		}
+		System.out.print("Digite tipo (PUBLICO ou PRIVADO): ");
+		tipo = scan.next().toUpperCase();
+		verificaTipo(tipo);
+
 	}
 
 	// Método que calcula o porte da empresa (Através do numero de funcionarios ou
@@ -125,7 +113,7 @@ public abstract class Corporacao implements AutenticaCNPJ {
 	}
 
 	// verifica se a empresa tem fins lucrativos ou não
-	public abstract void verificaFinsLucrativos();
+	protected abstract void verificaFinsLucrativos();
 
 	// Abaixo Apenas getters e setters
 	protected String getNome() {

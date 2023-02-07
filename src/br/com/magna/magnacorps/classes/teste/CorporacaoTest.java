@@ -49,6 +49,7 @@ public class CorporacaoTest {
 		Corporacao corporacao = new Corporacao(null, null, null, 101, 360.001, null, null, null, null) {
 			@Override
 			public void verificaFinsLucrativos() {
+				
 			}
 		};
 

@@ -1,0 +1,2 @@
+São Paulo Futebol Clube,SPFC,60.517.984/0001-04,501,7.3E8,MicroEmpresa,PRIVADO,false,true,Club Athletico Paulistano,Julio Casares,São,Esportiva-Futebol,301,
+Sport Club Corinthians Paulista,Corinthians,61.902.722/0001-26,501,7.76E9,MicroEmpresa,PRIVADO,false,true, Rafael Perrone,Duílio Monteiro Alves,São,Esportiva-Futebol,301,

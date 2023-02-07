@@ -1,0 +1,2 @@
+Ministério da Defesa Nacional,Ministério da Defesa,00.394.452/0533-04,4465,0.0,MicroEmpresa,PUBLICO,false,true,Congresso nacional,José Múcio,Brasilia,true,Segurança,
+Ministério da Saúde,Ministério da Saúde,00.530.493/0001-71,1572,0.0,MicroEmpresa,PUBLICO,false,true,Congresso nacional,Nísia Trindade Lima,Brasilia,true,Saúde,

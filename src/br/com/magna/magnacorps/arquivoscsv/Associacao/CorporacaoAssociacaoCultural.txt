@@ -1,0 +1,2 @@
+teste,teste,123654987987654,516,515.0,MicroEmpresa,PUBLICO,false,false,C:\dev\csvArchives\Associacao\CorporacaoAssociacaoCultural.txt,181,651.0,861,
+teste,teste,321654987987654,515,1815.0,MicroEmpresa,PUBLICO,false,false,teste,5641,515.0,51,

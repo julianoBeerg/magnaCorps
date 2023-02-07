@@ -1,0 +1,2 @@
+teste,teste,123654978987654,561,513.0,MicroEmpresa,PUBLICO,false,false,C:\dev\csvArchives\Associacao\CorporacaoAssociacaoDesportivo.txt,6684,861,86186,
+teste,teste,321654987987654,68518,14.0,MicroEmpresa,PUBLICO,false,false,teste,451,51,1851,

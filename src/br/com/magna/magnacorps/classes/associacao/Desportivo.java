@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -31,23 +32,15 @@ public class Desportivo extends Associacao {
 	// Método que utiliza metodo da classe Instituição para criar um objeto do tipo:
 	// (Corporação > Instituição > Familiar)
 	// Não pode ser instaciado direto na Main
-	@SuppressWarnings("resource")
-	public String fundarCorporacaoAssociacaoDesportivo() throws Exception, TratamentoException {
+	public String fundarCorporacaoAssociacaoDesportivo() {
 		fundarCorporacaoAssociacao();
 		Scanner scan = new Scanner(System.in);
-		try {
-			System.out.print("Digite a quantidade de instalações (Apenas números): ");
-			this.quantInstalacoes = scan.nextInt();
-		} catch (Exception e) {
-			throw new TratamentoException("O tipo deve ser númerico");
-		}
 
-		try {
-			System.out.print("Digite a quantidade de associados (Apenas números): ");
-			this.associados = scan.nextInt();
-		} catch (Exception e) {
-			throw new TratamentoException("O tipo deve ser númerico");
-		}
+		System.out.print("Digite a quantidade de instalações (Apenas números): ");
+		this.quantInstalacoes = scan.nextInt();
+
+		System.out.print("Digite a quantidade de associados (Apenas números): ");
+		this.associados = scan.nextInt();
 
 		System.out.println("\nCadastro Realizado com Sucesso !\n\n");
 
@@ -68,12 +61,13 @@ public class Desportivo extends Associacao {
 
 	// Método de input para ler arquivos CSV
 	public void inputCorporacaoAssociacaoDesportivo() throws IOException, TratamentoException {
-		List<Desportivo> list = new ArrayList<Desportivo>();
+		List<Desportivo> list = new ArrayList<>();
 
-		String path = "C:\\dev\\csvArchives\\Associacao\\CorporacaoAssociacaoDesportivo.txt";
+		String path = "src\\br\\com\\magna\\magnacorps\\arquivoscsv\\Associacao\\CorporacaoAssociacaoDesportivo.txt";
 
 		// Criando reader e utilizando padrão UTF-8
-		try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), "UTF-8"))) {
+		try (BufferedReader br = new BufferedReader(
+				new InputStreamReader(new FileInputStream(path), StandardCharsets.UTF_8))) {
 			String line = br.readLine();
 
 			// Lê cada linha e adciona na list
@@ -91,8 +85,8 @@ public class Desportivo extends Associacao {
 				Boolean finsLucrativos = Boolean.parseBoolean(vect[8]);
 				String fundador = vect[9];
 				Integer arrecadacao = Integer.parseInt(vect[10]);
-				Integer quantInstalacoes = Integer.parseInt(vect[11]);
-				Integer associados = Integer.parseInt(vect[12]);
+				quantInstalacoes = Integer.parseInt(vect[11]);
+				associados = Integer.parseInt(vect[12]);
 
 				Desportivo desportivo = new Desportivo(nome, nomeFantasia, cnpj, numFuncionarios, faturamento,
 						getPorte(), tipo, multinacional, finsLucrativos, fundador, arrecadacao, quantInstalacoes,
@@ -105,7 +99,7 @@ public class Desportivo extends Associacao {
 			// loop que imprima linha a linha utilizando
 			System.out.println("Corparação Associação Desportivo: \n");
 
-			if (list.isEmpty() != true) {
+			if (!list.isEmpty()) {
 				for (Desportivo f : list) {
 					System.out.println(f + "\n");
 				}
@@ -119,10 +113,10 @@ public class Desportivo extends Associacao {
 	}
 
 	// Output para escrita dos objetos no CSV
-	public void outputCorporacaoAssociacaoDesportivo() throws Exception {
-		List<Desportivo> list = new ArrayList<Desportivo>();
+	public void outputCorporacaoAssociacaoDesportivo() throws IOException {
+		List<Desportivo> list = new ArrayList<>();
 
-		String path = "C:\\dev\\csvArchives\\Associacao\\CorporacaoAssociacaoDesportivo.txt";
+		String path = "src\\br\\com\\magna\\magnacorps\\arquivoscsv\\Associacao\\CorporacaoAssociacaoDesportivo.txt";
 
 		Desportivo desportivo1 = new Desportivo(path, path, path, associados, getFaturamento(), porte, path,
 				getMultinacional(), getFinsLucrativos(), path, associados, quantInstalacoes, associados);
@@ -132,7 +126,7 @@ public class Desportivo extends Associacao {
 		list.add(desportivo1);
 
 		try (BufferedWriter out = new BufferedWriter(
-				new OutputStreamWriter(new FileOutputStream(path, true), "UTF-8"))) {
+				new OutputStreamWriter(new FileOutputStream(path, true), StandardCharsets.UTF_8))) {
 
 			for (Desportivo desportivo : list) {
 				out.append(desportivo.getNome());
@@ -176,10 +170,8 @@ public class Desportivo extends Associacao {
 				out.append('\n');
 			}
 			out.flush();
-			out.close();
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

@@ -2,3 +2,4 @@ Magazine Luiza S/A,Magazine Luiza,47.960.950/0001-21,38614,1.4E10,MicroEmpresa,P
 Companhia siderúrgica Nacional,CSN,33.042.730/0004-57,19000,6.0E9,MicroEmpresa,PRIVADO,false,true,Getúlio Vargas,Luis Fernando Martinez,São,Vargas,Benjamin SteinBruch,
 Votorantim Participações S/A,Votorantim ,51.082.582/0001-97,44000,2.4E10,MicroEmpresa,PRIVADO,true,true,Antonio Erminio de Moraes,Erminio Pereira de Moraes,São,Erminio,João Schmidt,
 Metalurgica Gerdau S/A,Gerdau,92.690.783/0001-09,28000,2.1E10,MicroEmpresa,PRIVADO,true,true,João Gerdau,Rafael Japur,Porto,Gerdau,Gustavo Werneck,
+teste,teste,123654789654987,151,5151.0,C:\dev\csvArchives\Insituicao\CorporacaoInstituicaoFamiliar.txt,C:\dev\csvArchives\Insituicao\CorporacaoInstituicaoFamiliar.txt,C:\dev\csvArchives\Insituicao\CorporacaoInstituicaoFamiliar.txt,teste,teste,123654987987654,5181,515.0,teste,teste,321654987987654,1846,88181.0,teste,teste,3216549879876543,181,814.0,
