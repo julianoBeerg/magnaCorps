@@ -26,9 +26,10 @@ public class ReligiosaTest {
 	}
 
 	@Test
-	public void verificaInputCorporacaoInstituicaoReligiosa() throws Exception {
-		List<Religiosa> list = new ArrayList<Religiosa>();
-		String path = "C:\\dev\\csvArchives\\Insituicao\\CorporacaoInstituicaoReligiosa.txt";
+	public void verificaInputCorporacaoInstituicaoReligiosa() {
+		List<Religiosa> list = new ArrayList<>();
+		String path = "src\\br\\com\\magna\\magnacorps\\arquivoscsv\\Insituicao\\CorporacaoInstituicaoReligiosa.txt";
+
 
 		Religiosa religiosa = new Religiosa(path, path, path, null, null, null, path, null, null, path, path, path,
 				path, path);

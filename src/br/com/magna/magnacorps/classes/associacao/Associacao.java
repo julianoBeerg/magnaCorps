@@ -15,6 +15,7 @@ public class Associacao extends Corporacao {
 		super(nome, nomeFantasia, cnpj, numFuncionarios, faturamento, porte, tipo, multinacional, finsLucrativos);
 		this.fundador = fundador;
 		this.arrecadacao = arrecadacao;
+		this.finsLucrativos = false;
 	}
 
 	// Método para fundar Instituicão a partir do metodo feito na classe corporação
@@ -30,14 +31,6 @@ public class Associacao extends Corporacao {
 		this.arrecadacao = scan.nextInt();
 
 		return nome;
-	}
-
-	// Metodo sobrescrito, ja informando valor pois toda Instituição tem fins
-	// lucrativos
-	@Override
-	protected void verificaFinsLucrativos() {
-		getFinsLucrativos();
-		setFinsLucrativos(false);
 	}
 
 	// Abaixo Apenas getters e setters

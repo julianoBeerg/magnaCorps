@@ -7,12 +7,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import br.com.magna.magnacorps.interfaces.Porte;
-import br.com.magna.magnacorps.main.TratamentoException;
 
 public class Religiosa extends Instituicao {
 
@@ -32,7 +32,7 @@ public class Religiosa extends Instituicao {
 	// Método que utiliza metodo da classe Instituição para criar um objeto do tipo:
 	// (Corporação > Instituição > Familiar)
 	// Não pode ser instaciado direto na Main
-	public String fundarCorporacaoInstituicaoReligiosa() throws Exception {
+	public String fundarCorporacaoInstituicaoReligiosa()  {
 		fundarCorporacaoInstituicao();
 
 		Scanner scan = new Scanner(System.in);
@@ -61,11 +61,11 @@ public class Religiosa extends Instituicao {
 	}
 
 	// Método de input para ler arquivos CSV
-	public void inputCorporacaoInstituicaoReligiosa() throws IOException, TratamentoException {
-		List<Religiosa> list = new ArrayList<Religiosa>();
-		String path = "C:\\dev\\csvArchives\\Insituicao\\CorporacaoInstituicaoReligiosa.txt";
+	public void inputCorporacaoInstituicaoReligiosa() throws IOException {
+		List<Religiosa> list = new ArrayList<>();
+		String path = "src\\br\\com\\magna\\magnacorps\\arquivoscsv\\Insituicao\\CorporacaoInstituicaoReligiosa.txt";
 		// Criando reader e utilizando padrão UTF-8
-		try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), "UTF-8"))) {
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), StandardCharsets.UTF_8))) {
 			String line = br.readLine();
 
 			// Lê cada linha e adciona na list
@@ -84,8 +84,8 @@ public class Religiosa extends Instituicao {
 				String fundador = vect[9];
 				String diretor = vect[10];
 				String sede = vect[11];
-				String representante = vect[12];
-				String nomeReligiao = vect[13];
+				representante = vect[12];
+				nomeReligiao = vect[13];
 
 				Religiosa religiosa = new Religiosa(nome, nomeFantasia, cnpj, numFuncionarios, faturamento, getPorte(),
 						tipo, multinacional, finsLucrativos, fundador, diretor, sede, representante, nomeReligiao);
@@ -97,23 +97,23 @@ public class Religiosa extends Instituicao {
 			// loop que imprima linha a linha utilizando
 			System.out.println("Corparação Instituição Regiliosa: \n");
 
-			if (list.isEmpty() != true) {
+			if (!list.isEmpty()) {
 				for (Religiosa f : list) {
 					System.out.println(f + "\n");
 				}
 			} else {
-				throw new TratamentoException("A lista não contém nenhuma corporação cadastrada");
+				System.out.println("A lista não contém nenhuma corporação cadastrada");
 			}
 
 		} catch (IOException e) {
-			throw new TratamentoException("Erro ao criar lista");
+			throw new NullPointerException();
 		}
 	}
 
 	// Output para escrita dos objetos no CSV
-	public void outputCorporacaoInstituicaoReligiosa() throws Exception {
-		List<Religiosa> list = new ArrayList<Religiosa>();
-		String path = "C:\\dev\\csvArchives\\Insituicao\\CorporacaoInstituicaoReligiosa.txt";
+	public void outputCorporacaoInstituicaoReligiosa() {
+		List<Religiosa> list = new ArrayList<>();
+		String path = "src\\br\\com\\magna\\magnacorps\\arquivoscsv\\Insituicao\\CorporacaoInstituicaoReligiosa.txt";
 
 		Religiosa religiosa1 = new Religiosa(path, path, path, numFuncionarios, getFaturamento(), porte, path,
 				getMultinacional(), getFinsLucrativos(), path, path, path, path, path);
@@ -121,7 +121,7 @@ public class Religiosa extends Instituicao {
 		list.add(religiosa1);
 
 		try (BufferedWriter out = new BufferedWriter(
-				new OutputStreamWriter(new FileOutputStream(path, true), "UTF-8"))) {
+				new OutputStreamWriter(new FileOutputStream(path, true), StandardCharsets.UTF_8))) {
 
 			for (Religiosa religiosa : list) {
 				out.append(religiosa.getNome());
@@ -168,10 +168,9 @@ public class Religiosa extends Instituicao {
 				out.append('\n');
 			}
 			out.flush();
-			out.close();
+
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

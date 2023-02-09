@@ -2,9 +2,13 @@ package br.com.magna.magnacorps.classes.instituicao.teste;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.junit.jupiter.api.Test;
+
 import br.com.magna.magnacorps.classes.instituicao.Economica;
 
 public class EconomicaTest {
@@ -24,9 +28,9 @@ public class EconomicaTest {
 	}
 
 	@Test
-	public void verificaInputCorporacaoInstituicaoEconomica() throws Exception {
-		List<Economica> list = new ArrayList<Economica>();
-		String path = "C:\\dev\\csvArchives\\Insituicao\\CorporacaoInstituicaoEconomica.txt";
+	public void verificaInputCorporacaoInstituicaoEconomica(){
+		List<Economica> list = new ArrayList<>();
+		String path = "src\\br\\com\\magna\\magnacorps\\arquivoscsv\\Insituicao\\CorporacaoInstituicaoEconomica.txt";
 
 		Economica economica = new Economica(path, path, path, null, null, null, path, null, null, path, path, path,
 				null, null);
@@ -36,9 +40,9 @@ public class EconomicaTest {
 	}
 	
 	@Test
-	public void verificaOutputCorporacaoInstituicaoEconomica() throws Exception {
-		List<Economica> list = new ArrayList<Economica>();
-		String path = "C:\\dev\\csvArchives\\Insituicao\\CorporacaoInstituicaoEconomica.txt";
+	public void verificaOutputCorporacaoInstituicaoEconomica() throws IOException {
+		List<Economica> list = new ArrayList<>();
+		String path = "src\\br\\com\\magna\\magnacorps\\arquivoscsv\\Insituicao\\CorporacaoInstituicaoEconomica.txt";
 
 		Economica economica = new Economica(path, path, path, 0, 0.0, null, path,
 				null, null, path, null, path, null, null);

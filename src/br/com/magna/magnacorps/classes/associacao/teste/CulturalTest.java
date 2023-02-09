@@ -2,6 +2,8 @@ package br.com.magna.magnacorps.classes.associacao.teste;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -24,9 +26,9 @@ public class CulturalTest {
 	}
 
 	@Test
-	public void verificaInputCorporacaoAssociacaoCultural() throws Exception {
-		List<Cultural> list = new ArrayList<Cultural>();
-		String path = "C:\\dev\\csvArchives\\Insituicao\\CorporacaoAssociacaoCultural.txt";
+	public void verificaInputCorporacaoAssociacaoCultural() {
+		List<Cultural> list = new ArrayList<>();
+		String path = "src\\br\\com\\magna\\magnacorps\\arquivoscsv\\Associacao\\CorporacaoAssociacaoCultural.txt";
 
 		Cultural cultural = new Cultural(path, path, path, 0, 0.0, null, path, null, null, path, null, null, null);
 
@@ -35,9 +37,9 @@ public class CulturalTest {
 	}
 
 	@Test
-	public void verificaOutputCorporacaoAssociacaoCultural() throws Exception {
-		List<Cultural> list = new ArrayList<Cultural>();
-		String path = "C:\\dev\\csvArchives\\Insituicao\\CorporacaoAssociacaoCultural.txt";
+	public void verificaOutputCorporacaoAssociacaoCultural() throws IOException {
+		List<Cultural> list = new ArrayList<>();
+		String path = "src\\br\\com\\magna\\magnacorps\\arquivoscsv\\Associacao\\CorporacaoAssociacaoCultural.txt";
 
 		Cultural cultural = new Cultural(path, path, path, 0, 0.0, null, path, null, null, path, null, null, null);
 

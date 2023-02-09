@@ -2,6 +2,8 @@ package br.com.magna.magnacorps.classes.sociedade.teste;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -24,9 +26,9 @@ public class ComanditaTest {
 	}
 
 	@Test
-	public void verificaInputCorporacaoInstituicaoComandita() throws Exception {
-		List<Comandita> list = new ArrayList<Comandita>();
-		String path = "C:\\dev\\csvArchives\\Insituicao\\CorporacaoSociedadeComandita.txt";
+	public void verificaInputCorporacaoInstituicaoComandita() {
+		List<Comandita> list = new ArrayList<>();
+		String path = "src\\br\\com\\magna\\magnacorps\\arquivoscsv\\Sociedade\\CorporacaoSociedadeComandita.txt";
 
 		Comandita comandita = new Comandita(path, path, path, null, null, null, path, null, null, path, null, path,
 				path, null);
@@ -36,9 +38,9 @@ public class ComanditaTest {
 	}
 
 	@Test
-	public void verificaOutputCorporacaoSociedadeComandita() throws Exception {
-		List<Comandita> list = new ArrayList<Comandita>();
-		String path = "C:\\dev\\csvArchives\\Insituicao\\CorporacaoSociedadeComandita.txt";
+	public void verificaOutputCorporacaoSociedadeComandita() throws IOException {
+		List<Comandita> list = new ArrayList<>();
+		String path = "src\\br\\com\\magna\\magnacorps\\arquivoscsv\\Sociedade\\CorporacaoSociedadeComandita.txt";
 
 		Comandita comandita = new Comandita(path, path, path, 0, 0.0, null, path, null, null, path, null, path, path,
 				null);

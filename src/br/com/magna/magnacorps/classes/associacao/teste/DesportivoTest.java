@@ -2,6 +2,8 @@ package br.com.magna.magnacorps.classes.associacao.teste;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -27,7 +29,7 @@ public class DesportivoTest {
 	@Test
 	public void verificaInputCorporacaoAssociacaoDesportivo() {
 		List<Desportivo> list = new ArrayList<>();
-		String path = "C:\\dev\\csvArchives\\Insituicao\\CorporacaoAssociacaoSocial.txt";
+		String path = "src\\br\\com\\magna\\magnacorps\\arquivoscsv\\Associacao\\CorporacaoAssociacaoDesportivo.txt";
 
 		Desportivo desportivo = new Desportivo(path, path, path, 0, 0.0, null, path, null, null, path, null, null,
 				null);
@@ -37,9 +39,9 @@ public class DesportivoTest {
 	}
 
 	@Test
-	public void verificaOutputCorporacaoAssociacaoDesportivo() throws Exception {
+	public void verificaOutputCorporacaoAssociacaoDesportivo() throws IOException {
 		List<Desportivo> list = new ArrayList<>();
-		String path = "C:\\dev\\csvArchives\\Insituicao\\CorporacaoAssociacaoDesportivo.txt";
+		String path = "src\\br\\com\\magna\\magnacorps\\arquivoscsv\\Associacao\\CorporacaoAssociacaoDesportivo.txt";
 
 		Desportivo desportivo = new Desportivo(path, path, path, 0, 0.0, null, path, null, null, path, null, null,
 				null);

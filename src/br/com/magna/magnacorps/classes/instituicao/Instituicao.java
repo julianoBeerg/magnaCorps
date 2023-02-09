@@ -15,14 +15,15 @@ public class Instituicao extends Corporacao {
 			Porte porte, String tipo, Boolean multinacional, Boolean finsLucrativos, String fundador, String diretor,
 			String sede) {
 		super(nome, nomeFantasia, cnpj, numFuncionarios, faturamento, porte, tipo, multinacional,
-				finsLucrativos = true);
+				finsLucrativos);
 		this.fundador = fundador;
 		this.diretor = diretor;
 		this.sede = sede;
+		this.finsLucrativos = true;
 	}
 
 	// Método para fundar Instituicão a partir do metodo feito na classe corporação
-	public void fundarCorporacaoInstituicao() throws Exception {
+	public void fundarCorporacaoInstituicao() {
 		fundarCorporacao();
 		@SuppressWarnings("resource")
 		Scanner scan = new Scanner(System.in);
@@ -34,14 +35,6 @@ public class Instituicao extends Corporacao {
 
 		System.out.print("Digite sede: ");
 		sede = scan.next();
-	}
-
-	// Metodo sobrescrito, ja informando valor pois toda Instituição tem fins
-	// lucrativos
-	@Override
-	public void verificaFinsLucrativos() {
-		getFinsLucrativos();
-		setFinsLucrativos(true);
 	}
 	
 	public Integer verificaInstituicoes(Integer opcaoInstituicao) {

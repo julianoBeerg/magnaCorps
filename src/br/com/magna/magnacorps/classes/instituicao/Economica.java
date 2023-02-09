@@ -7,12 +7,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import br.com.magna.magnacorps.interfaces.Porte;
-import br.com.magna.magnacorps.main.TratamentoException;
 
 public class Economica extends Instituicao {
 
@@ -32,25 +32,16 @@ public class Economica extends Instituicao {
 	// Método que utiliza metodo da classe Instituição para criar um objeto do tipo:
 	// (Corporação > Instituição > Familiar)
 	// Não pode ser instaciado direto na Main
-	@SuppressWarnings("resource")
-	public Integer fundarCorporacaoInstituicaoEconomica() throws Exception, TratamentoException {
+	public Integer fundarCorporacaoInstituicaoEconomica() {
 		fundarCorporacaoInstituicao();
 
 		Scanner scan = new Scanner(System.in);
 
-		try {
-			System.out.print("Digite número de clientes (Apenas números): ");
-			this.clientes = scan.nextInt();
-		} catch (Exception e) {
-			throw new TratamentoException("O Tipo deve ser númerico");
-		}
+		System.out.print("Digite número de clientes (Apenas números): ");
+		this.clientes = scan.nextInt();
 
-		try {
-			System.out.print("Digite a quantidade de acionistas (Apenas números): ");
-			this.acionistas = scan.nextInt();
-		} catch (Exception e) {
-			throw new TratamentoException("O Tipo deve ser númerico");
-		}
+		System.out.print("Digite a quantidade de acionistas (Apenas números): ");
+		this.acionistas = scan.nextInt();
 
 		System.out.println("\nCadastro Realizado com Sucesso !\n\n");
 
@@ -70,12 +61,13 @@ public class Economica extends Instituicao {
 	}
 
 	// Método de input para ler arquivos CSV
-	public void inputCorporacaoInstituicaoEconomica() throws IOException, TratamentoException {
-		List<Economica> list = new ArrayList<Economica>();
+	public void inputCorporacaoInstituicaoEconomica() throws IOException {
+		List<Economica> list = new ArrayList<>();
 
-		String path = "C:\\dev\\csvArchives\\Insituicao\\CorporacaoInstituicaoEconomica.txt";
+		String path = "src\\br\\com\\magna\\magnacorps\\arquivoscsv\\Insituicao\\CorporacaoInstituicaoEconomica.txt";
 		// Criando reader e utilizando padrão UTF-8
-		try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), "UTF-8"))) {
+		try (BufferedReader br = new BufferedReader(
+				new InputStreamReader(new FileInputStream(path), StandardCharsets.UTF_8))) {
 			String line = br.readLine();
 
 			// Lê cada linha e adiciona na list
@@ -94,8 +86,8 @@ public class Economica extends Instituicao {
 				String fundador = vect[9];
 				String diretor = vect[10];
 				String sede = vect[11];
-				Integer clientes = Integer.parseInt(vect[12]);
-				Integer acionistas = Integer.parseInt(vect[13]);
+				clientes = Integer.parseInt(vect[12]);
+				acionistas = Integer.parseInt(vect[13]);
 
 				Economica economica = new Economica(nome, nomeFantasia, cnpj, numFuncionarios, faturamento, getPorte(),
 						tipo, multinacional, finsLucrativos, fundador, diretor, sede, clientes, acionistas);
@@ -107,23 +99,23 @@ public class Economica extends Instituicao {
 			// loop que imprima linha a linha utilizando
 			System.out.println("Corparação Instituição Economica: \n");
 
-			if (list.isEmpty() != true) {
+			if (!list.isEmpty()) {
 				for (Economica f : list) {
 					System.out.println(f + "\n");
 				}
 			} else {
-				throw new TratamentoException("A lista não contém nenhuma corporação cadastrada");
+				System.out.println("A lista não contém nenhuma corporação cadastrada");
 			}
 
 		} catch (IOException e) {
-			throw new TratamentoException("Erro ao criar lista");
+			throw new NullPointerException();
 		}
 	}
 
 	// Output para escrita dos objetos no CSV
-	public void outputCorporacaoInstituicaoEconomica() throws Exception {
-		String path = "C:\\dev\\csvArchives\\Insituicao\\CorporacaoInstituicaoEconomica.txt";
-		List<Economica> list = new ArrayList<Economica>();
+	public void outputCorporacaoInstituicaoEconomica() {
+		String path = "src\\br\\com\\magna\\magnacorps\\arquivoscsv\\Insituicao\\CorporacaoInstituicaoEconomica.txt";
+		List<Economica> list = new ArrayList<>();
 
 		Economica economica1 = new Economica(path, path, path, acionistas, getFaturamento(), porte, path,
 				getMultinacional(), getFinsLucrativos(), path, path, path, clientes, acionistas);
@@ -133,7 +125,7 @@ public class Economica extends Instituicao {
 		list.add(economica1);
 
 		try (BufferedWriter out = new BufferedWriter(
-				new OutputStreamWriter(new FileOutputStream(path, true), "UTF-8"))) {
+				new OutputStreamWriter(new FileOutputStream(path, true), StandardCharsets.UTF_8))) {
 
 			for (Economica economica : list) {
 				out.append(economica.getNome());
@@ -180,10 +172,8 @@ public class Economica extends Instituicao {
 				out.append('\n');
 			}
 			out.flush();
-			out.close();
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

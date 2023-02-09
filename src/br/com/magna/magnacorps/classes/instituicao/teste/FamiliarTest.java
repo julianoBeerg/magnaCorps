@@ -2,6 +2,8 @@ package br.com.magna.magnacorps.classes.instituicao.teste;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -24,9 +26,9 @@ public class FamiliarTest {
 	}
 
 	@Test
-	public void verificaInputCorporacaoInstituicaoFamiliar() throws Exception {
-		List<Familiar> list = new ArrayList<Familiar>();
-		String path = "C:\\dev\\csvArchives\\Insituicao\\CorporacaoInstituicaoFamiliar.txt";
+	public void verificaInputCorporacaoInstituicaoFamiliar() {
+		List<Familiar> list = new ArrayList<>();
+		String path = "src\\br\\com\\magna\\magnacorps\\arquivoscsv\\Insituicao\\CorporacaoInstituicaoFamiliar.txt";
 
 		Familiar familiar = new Familiar(path, path, path, null, null, null, path, null, null, path, path, path, path,
 				path);
@@ -36,9 +38,9 @@ public class FamiliarTest {
 	}
 
 	@Test
-	public void verificaOutputCorporacaoInstituicaoFamiliar() throws Exception {
-		List<Familiar> list = new ArrayList<Familiar>();
-		String path = "C:\\dev\\csvArchives\\Insituicao\\CorporacaoInstituicaoFamiliar.txt";
+	public void verificaOutputCorporacaoInstituicaoFamiliar() throws IOException {
+		List<Familiar> list = new ArrayList<>();
+		String path = "src\\br\\com\\magna\\magnacorps\\arquivoscsv\\Insituicao\\CorporacaoInstituicaoFamiliar.txt";
 
 		Familiar familiar = new Familiar(path, path, path, 0, 0.0, null, path, null, null, path, null, path, null,
 				null);

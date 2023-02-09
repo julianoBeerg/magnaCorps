@@ -3,6 +3,7 @@ package br.com.magna.magnacorps.classes.instituicao.teste;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,9 +28,9 @@ public class GovernamentalTest {
 	}
 
 	@Test
-	public void verificaInputCorporacaoInstituicaoGovernamental() throws Exception {
-		List<Governamental> list = new ArrayList<Governamental>();
-		String path = "C:\\dev\\csvArchives\\Insituicao\\CorporacaoInstituicaoGovernamental.txt";
+	public void verificaInputCorporacaoInstituicaoGovernamental(){
+		List<Governamental> list = new ArrayList<>();
+		String path = "src\\br\\com\\magna\\magnacorps\\arquivoscsv\\Insituicao\\CorporacaoInstituicaoGovernamental.txt";
 
 		Governamental governamental = new Governamental(path, path, path, null, null, null, path, null, null, path,
 				path, path, null, path);
@@ -39,9 +40,9 @@ public class GovernamentalTest {
 	}
 	
 	@Test
-	public void verificaOutputCorporacaoInstituicaoGovernamental() throws Exception {
-		List<Governamental> list = new ArrayList<Governamental>();
-		String path = "C:\\dev\\csvArchives\\Insituicao\\CorporacaoInstituicaoGovernamental.txt";
+	public void verificaOutputCorporacaoInstituicaoGovernamental() throws IOException {
+		List<Governamental> list = new ArrayList<>();
+		String path = "src\\br\\com\\magna\\magnacorps\\arquivoscsv\\Insituicao\\CorporacaoInstituicaoGovernamental.txt";
 
 		Governamental governamental = new Governamental(path, path, path, 0, 0.0, null, path, null, null, path,
 				path, path, null, path);

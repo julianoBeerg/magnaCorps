@@ -7,12 +7,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import br.com.magna.magnacorps.interfaces.Porte;
-import br.com.magna.magnacorps.main.TratamentoException;
 
 public class Comandita extends Sociedade {
 	private String diretor;
@@ -32,8 +32,7 @@ public class Comandita extends Sociedade {
 	// Método que utiliza metodo da classe Instituição para criar um objeto do tipo:
 	// (Corporação > Instituição > Familiar)
 	// Não pode ser instaciado direto na Main
-	@SuppressWarnings("resource")
-	public String fundarCorporacaoSociedadeComandita() throws Exception, TratamentoException {
+	public String fundarCorporacaoSociedadeComandita() {
 		fundarCorporacaoSociedade();
 		Scanner scan = new Scanner(System.in);
 
@@ -43,12 +42,8 @@ public class Comandita extends Sociedade {
 		System.out.print("Digite a area de atuação: ");
 		this.area = scan.nextLine();
 
-		try {
 			System.out.print("Digite a quantidade de ações (Apenas números): ");
 			this.quantAcoes = scan.nextInt();
-		} catch (Exception e) {
-			throw new TratamentoException("O tipo deve ser númerico");
-		}
 
 		System.out.println("\nCadastro Realizado com Sucesso !\n\n");
 
@@ -68,13 +63,13 @@ public class Comandita extends Sociedade {
 	}
 
 	// Método de input para ler arquivos CSV
-	public void inputCorporacaoSociedadeComandita() throws IOException, TratamentoException {
-		List<Comandita> list = new ArrayList<Comandita>();
+	public void inputCorporacaoSociedadeComandita() throws IOException {
+		List<Comandita> list = new ArrayList<>();
 
-		String path = "C:\\dev\\csvArchives\\Sociedade\\CorporacaoSociedadeComandita.txt";
+		String path = "src\\br\\com\\magna\\magnacorps\\arquivoscsv\\Sociedade\\CorporacaoSociedadeComandita.txt";
 
 		// Criando reader e utilizando padrão UTF-8
-		try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), "UTF-8"))) {
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), StandardCharsets.UTF_8))) {
 			String line = br.readLine();
 
 			// Lê cada linha e adciona na list
@@ -92,9 +87,9 @@ public class Comandita extends Sociedade {
 				Boolean finsLucrativos = Boolean.parseBoolean(vect[8]);
 				String sede = vect[9];
 				Integer sociosQuant = Integer.parseInt(vect[10]);
-				String diretor = vect[11];
-				String area = vect[12];
-				Integer quantAcoes = Integer.parseInt(vect[13]);
+				diretor = vect[11];
+				area = vect[12];
+				quantAcoes = Integer.parseInt(vect[13]);
 
 				Comandita comandita = new Comandita(nome, nomeFantasia, cnpj, numFuncionarios, faturamento, getPorte(),
 						tipo, multinacional, finsLucrativos, sede, sociosQuant, diretor, area, quantAcoes);
@@ -106,24 +101,24 @@ public class Comandita extends Sociedade {
 			// loop que imprima linha a linha utilizando
 			System.out.println("Corparação Sociedade Comandita: \n");
 
-			if (list.isEmpty() != true) {
+			if (!list.isEmpty()) {
 				for (Comandita f : list) {
 					System.out.println(f + "\n");
 				}
 			} else {
-				throw new TratamentoException("A lista não contém nenhuma corporação cadastrada");
+				System.out.println("A lista não contém nenhuma corporação cadastrada");
 			}
 
 		} catch (IOException e) {
-			throw new TratamentoException("Erro ao criar lista");
+			throw new NullPointerException();
 		}
 	}
 
 	// Output para escrita dos objetos no CSV
-	public void outputCorporacaoSociedadeComandita() throws Exception {
-		List<Comandita> list = new ArrayList<Comandita>();
+	public void outputCorporacaoSociedadeComandita() {
+		List<Comandita> list = new ArrayList<>();
 
-		String path = "C:\\dev\\csvArchives\\Sociedade\\CorporacaoSociedadeComandita.txt";
+		String path = "src\\br\\com\\magna\\magnacorps\\arquivoscsv\\Sociedade\\CorporacaoSociedadeComandita.txt";
 
 		Comandita comandita1 = new Comandita(path, path, path, quantAcoes, getFaturamento(), porte, path,
 				getMultinacional(), getFinsLucrativos(), path, quantAcoes, path, path, quantAcoes);
@@ -133,7 +128,7 @@ public class Comandita extends Sociedade {
 		list.add(comandita1);
 
 		try (BufferedWriter out = new BufferedWriter(
-				new OutputStreamWriter(new FileOutputStream(path, true), "UTF-8"))) {
+				new OutputStreamWriter(new FileOutputStream(path, true), StandardCharsets.UTF_8))) {
 
 			for (Comandita comandita : list) {
 				out.append(comandita.getNome());
@@ -180,10 +175,8 @@ public class Comandita extends Sociedade {
 				out.append('\n');
 			}
 			out.flush();
-			out.close();
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

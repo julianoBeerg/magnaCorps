@@ -30,7 +30,7 @@ public abstract class Corporacao implements AutenticaCNPJ {
 		this.multinacional = multinacional;
 		this.finsLucrativos = finsLucrativos;
 	}
-
+	
 	// Método para validar se o tipo é público ou privado se for privado verifica se
 	// é multinacional ou não
 	public String verificaTipo(String tipo) {
@@ -94,26 +94,24 @@ public abstract class Corporacao implements AutenticaCNPJ {
 	// faturamento
 	public Porte enumPorte() {
 		if (numFuncionarios == 1) {
-			setPorte(Porte.MicroEmpreendedor);
+			setPorte(Porte.MICROEMPREENDEDOR);
 		} else if (numFuncionarios > 1 && numFuncionarios <= 50 || faturamento <= 360.000) {
-			setPorte(Porte.MicroEmpresa);
+			setPorte(Porte.MICROEMPRESA);
 		} else if (numFuncionarios > 50 && numFuncionarios <= 1000
 				|| faturamento > 360.000 && faturamento <= 4.800000) {
-			setPorte(Porte.EmpresaPequenoPorte);
+			setPorte(Porte.EMPRESAPEQUENOPORTE);
 		} else if (numFuncionarios > 1000 && numFuncionarios <= 10000
 				|| faturamento > 4.80000 && faturamento <= 20.000000) {
-			setPorte(Porte.EmpresaMedioPorte);
+			setPorte(Porte.EMPRESAMEDIOPORTE);
 		} else if (numFuncionarios > 10000 && numFuncionarios <= 100000
 				|| faturamento > 20.00000 && faturamento <= 50.000000) {
-			setPorte(Porte.EmpresaGrandePorteII);
+			setPorte(Porte.EMPRESAGRANDEPORTEII);
 		} else if (numFuncionarios > 100000 || faturamento > 50.00000) {
-			setPorte(Porte.EmpresaGrandePorteI);
+			setPorte(Porte.EMPRESAGRANDEPORTEI);
 		}
 		return porte;
 	}
 
-	// verifica se a empresa tem fins lucrativos ou não
-	protected abstract void verificaFinsLucrativos();
 
 	// Abaixo Apenas getters e setters
 	protected String getNome() {
@@ -183,5 +181,7 @@ public abstract class Corporacao implements AutenticaCNPJ {
 	protected void setPorte(Porte porte) {
 		this.porte = porte;
 	}
+	
 
 }
+

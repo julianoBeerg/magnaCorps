@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Scanner;
 
 import br.com.magna.magnacorps.interfaces.Porte;
-import br.com.magna.magnacorps.main.TratamentoException;
 
 public class Social extends Associacao {
 
@@ -65,7 +64,7 @@ public class Social extends Associacao {
 	}
 
 	// Método de input para ler arquivos CSV
-	public void inputCorporacaoAssociacaoSocial() throws IOException, TratamentoException {
+	public void inputCorporacaoAssociacaoSocial() throws IOException {
 		List<Social> list = new ArrayList<>();
 
 		String path = "src\\br\\com\\magna\\magnacorps\\arquivoscsv\\Associacao\\CorporacaoAssociacaoSocial.txt";
@@ -109,11 +108,11 @@ public class Social extends Associacao {
 					System.out.println(f + "\n");
 				}
 			} else {
-				throw new TratamentoException("A lista não contém nenhuma corporação cadastrada");
+				System.out.println("A lista não contém nenhuma corporação cadastrada");
 			}
 
 		} catch (IOException e) {
-			throw new TratamentoException("Erro ao criar lista");
+			throw new NullPointerException();
 		}
 	}
 

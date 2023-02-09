@@ -2,6 +2,8 @@ package br.com.magna.magnacorps.classes.sociedade.teste;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -25,9 +27,9 @@ public class LimitadaColetivaTest {
 	}
 
 	@Test
-	public void verificaInputCorporacaoInstituicaoLimitadaColetiva() throws Exception {
-		List<LimitadaColetiva> list = new ArrayList<LimitadaColetiva>();
-		String path = "C:\\dev\\csvArchives\\Insituicao\\CorporacaoSociedadeLimitadaColetiva.txt";
+	public void verificaInputCorporacaoInstituicaoLimitadaColetiva(){
+		List<LimitadaColetiva> list = new ArrayList<>();
+		String path = "src\\br\\com\\magna\\magnacorps\\arquivoscsv\\Sociedade\\CorporacaoSociedadeLimitadaColetiva.txt";
 
 		LimitadaColetiva limitadaColetiva = new LimitadaColetiva(path, path, path, null, null, null, path, null, null,
 				path, null, path, path);
@@ -37,9 +39,9 @@ public class LimitadaColetivaTest {
 	}
 
 	@Test
-	public void verificaOutputCorporacaoSociedadeLimitadaColetiva() throws Exception {
-		List<LimitadaColetiva> list = new ArrayList<LimitadaColetiva>();
-		String path = "C:\\dev\\csvArchives\\Insituicao\\CorporacaoSociedadeLimitadaColetiva.txt";
+	public void verificaOutputCorporacaoSociedadeLimitadaColetiva() throws IOException {
+		List<LimitadaColetiva> list = new ArrayList<>();
+		String path = "src\\br\\com\\magna\\magnacorps\\arquivoscsv\\Sociedade\\CorporacaoSociedadeLimitadaColetiva.txt";
 
 		LimitadaColetiva limitadaColetiva = new LimitadaColetiva(path, path, path, 0, 0.0, null, path, null, null, path,
 				null, path, path);

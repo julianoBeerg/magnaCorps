@@ -3,9 +3,12 @@ package br.com.magna.magnacorps.classes.instituicao.teste;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.junit.jupiter.api.Test;
+
 import br.com.magna.magnacorps.classes.instituicao.Ensino;
 
 public class EnsinoTest {
@@ -24,9 +27,9 @@ public class EnsinoTest {
 	}
 
 	@Test
-	public void verificaInputCorporacaoInstituicaoEnsino() throws Exception {
-		List<Ensino> list = new ArrayList<Ensino>();
-		String path = "C:\\dev\\csvArchives\\Insituicao\\CorporacaoInstituicaoEnsino.txt";
+	public void verificaInputCorporacaoInstituicaoEnsino(){
+		List<Ensino> list = new ArrayList<>();
+		String path = "src\\br\\com\\magna\\magnacorps\\arquivoscsv\\Insituicao\\CorporacaoInstituicaoEnsino.txt";
 
 		Ensino ensino = new Ensino(path, path, path, null, null, null, path, null, null, path, path, path, path, null);
 
@@ -35,9 +38,9 @@ public class EnsinoTest {
 	}
 
 	@Test
-	public void verificaOutputCorporacaoInstituicaoEnsino() throws Exception {
-		List<Ensino> list = new ArrayList<Ensino>();
-		String path = "C:\\dev\\csvArchives\\Insituicao\\CorporacaoInstituicaoEconomica.txt";
+	public void verificaOutputCorporacaoInstituicaoEnsino() throws IOException {
+		List<Ensino> list = new ArrayList<>();
+		String path = "src\\br\\com\\magna\\magnacorps\\arquivoscsv\\Insituicao\\CorporacaoInstituicaoEnsino.txt";
 
 		Ensino ensino = new Ensino(path, path, path, 0, 0.0, null, path, null, null, path, null, path, null, null);
 

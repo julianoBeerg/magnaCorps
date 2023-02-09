@@ -7,12 +7,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import br.com.magna.magnacorps.interfaces.Porte;
-import br.com.magna.magnacorps.main.TratamentoException;
 
 public class Simples extends Sociedade {
 
@@ -32,20 +32,17 @@ public class Simples extends Sociedade {
 	// Método que utiliza metodo da classe Instituição para criar um objeto do tipo:
 	// (Corporação > Instituição > Familiar)
 	// Não pode ser instaciado direto na Main
-	@SuppressWarnings("resource")
-	public String fundarCorporacaoSociedadeSimples() throws Exception, TratamentoException {
+	public String fundarCorporacaoSociedadeSimples() {
 		fundarCorporacaoSociedade();
 		Scanner scan = new Scanner(System.in);
 
 		System.out.print("Digite a area de atuação: ");
 		this.area = scan.nextLine();
 
-		try {
+
 			System.out.print("Digite o CREA (Apenas números): ");
 			this.crea = scan.nextInt();
-		} catch (Exception e) {
-			throw new TratamentoException("O tipo deve ser númerico");
-		}
+	
 
 		System.out.println("\nCadastro Realizado com Sucesso !\n\n");
 
@@ -64,13 +61,13 @@ public class Simples extends Sociedade {
 	}
 
 	// Método de input para ler arquivos CSV
-	public void inputCorporacaoSociedadeSimples() throws IOException, TratamentoException {
-		List<Simples> list = new ArrayList<Simples>();
+	public void inputCorporacaoSociedadeSimples() throws IOException {
+		List<Simples> list = new ArrayList<>();
 
-		String path = "C:\\dev\\csvArchives\\Sociedade\\CorporacaoSociedadeSimples.txt";
+		String path = "src\\br\\com\\magna\\magnacorps\\arquivoscsv\\Sociedade\\CorporacaoSociedadeSimples.txt";
 
 		// Criando reader e utilizando padrão UTF-8
-		try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), "UTF-8"))) {
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), StandardCharsets.UTF_8))) {
 			String line = br.readLine();
 
 			// Lê cada linha e adciona na list
@@ -88,8 +85,8 @@ public class Simples extends Sociedade {
 				Boolean finsLucrativos = Boolean.parseBoolean(vect[8]);
 				String sede = vect[9];
 				Integer sociosQuant = Integer.parseInt(vect[10]);
-				Integer crea = Integer.parseInt(vect[11]);
-				String area = vect[12];
+				crea = Integer.parseInt(vect[11]);
+				area = vect[12];
 
 				Simples simples = new Simples(nome, nomeFantasia, cnpj, numFuncionarios, faturamento, getPorte(), tipo,
 						multinacional, finsLucrativos, sede, sociosQuant, crea, area);
@@ -101,23 +98,23 @@ public class Simples extends Sociedade {
 			// loop que imprima linha a linha utilizando
 			System.out.println("Corparação Sociedade Simples: \n");
 
-			if (list.isEmpty() != true) {
+			if (!list.isEmpty()) {
 				for (Simples f : list) {
 					System.out.println(f + "\n");
 				}
 			} else {
-				throw new TratamentoException("A lista não contém nenhuma corporação cadastrada");
+				System.out.println("A lista não contém nenhuma corporação cadastrada");
 			}
 
 		} catch (IOException e) {
-			throw new TratamentoException("Erro ao criar lista");
+			throw new NullPointerException();
 		}
 	}
 
 	// Output para escrita dos objetos no CSV
-	public void outputCorporacaoSociedadeSimples() throws Exception {
-		String path = "C:\\dev\\csvArchives\\Sociedade\\CorporacaoSociedadeSimples.txt";
-		List<Simples> list = new ArrayList<Simples>();
+	public void outputCorporacaoSociedadeSimples() {
+		String path = "src\\br\\com\\magna\\magnacorps\\arquivoscsv\\Sociedade\\CorporacaoSociedadeSimples.txt";
+		List<Simples> list = new ArrayList<>();
 
 		Simples simples1 = new Simples(path, path, path, crea, getFaturamento(), porte, path, getMultinacional(),
 				getFinsLucrativos(), path, crea, crea, path);
@@ -127,7 +124,7 @@ public class Simples extends Sociedade {
 		list.add(simples1);
 
 		try (BufferedWriter out = new BufferedWriter(
-				new OutputStreamWriter(new FileOutputStream(path, true), "UTF-8"))) {
+				new OutputStreamWriter(new FileOutputStream(path, true), StandardCharsets.UTF_8))) {
 
 			for (Simples simples : list) {
 				out.append(simples.getNome());
@@ -171,10 +168,8 @@ public class Simples extends Sociedade {
 				out.append('\n');
 			}
 			out.flush();
-			out.close();
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

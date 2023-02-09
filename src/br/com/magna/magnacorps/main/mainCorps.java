@@ -14,7 +14,7 @@ import br.com.magna.magnacorps.classes.sociedade.Comandita;
 import br.com.magna.magnacorps.classes.sociedade.LimitadaColetiva;
 import br.com.magna.magnacorps.classes.sociedade.Simples;
 
-public class mainCorps {
+public class MainCorps {
 
 	public static void main(String[] args) throws Exception {
 

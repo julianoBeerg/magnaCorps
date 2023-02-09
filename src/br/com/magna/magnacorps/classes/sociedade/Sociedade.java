@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 import br.com.magna.magnacorps.classes.Corporacao;
 import br.com.magna.magnacorps.interfaces.Porte;
-import br.com.magna.magnacorps.main.TratamentoException;
 
 public class Sociedade extends Corporacao {
 	String sede;
@@ -16,10 +15,11 @@ public class Sociedade extends Corporacao {
 		super(nome, nomeFantasia, cnpj, numFuncionarios, faturamento, porte, tipo, multinacional, finsLucrativos);
 		this.sede = sede;
 		this.sociosQuant = sociosQuant;
+		this.finsLucrativos = true;
 	}
 
 	// Método para fundar Instituicão a partir do metodo feito na classe corporação
-	public void fundarCorporacaoSociedade() throws Exception {
+	public void fundarCorporacaoSociedade() {
 		fundarCorporacao();
 		@SuppressWarnings("resource")
 		Scanner scan = new Scanner(System.in);
@@ -27,22 +27,13 @@ public class Sociedade extends Corporacao {
 		System.out.print("Digite sede: ");
 		sede = scan.next();
 
-		try {
 			System.out.print("Digite a quantidade de sócios (Apenas números): ");
 			this.sociosQuant = scan.nextInt();
-		} catch (Exception e) {
-			throw new TratamentoException("O Tipo deve ser númerico");
-		}
+	
 
 	}
 
-	// Metodo sobrescrito, ja informando valor pois toda Instituição tem fins
-	// lucrativos
-	@Override
-	public void verificaFinsLucrativos() {
-		getFinsLucrativos();
-		setFinsLucrativos(true);
-	}
+
 
 	// Abaixo Apenas getters e setters
 	public String getSede() {

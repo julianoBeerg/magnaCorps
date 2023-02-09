@@ -7,12 +7,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import br.com.magna.magnacorps.interfaces.Porte;
-import br.com.magna.magnacorps.main.TratamentoException;
 
 public class Familiar extends Instituicao {
 
@@ -32,7 +32,7 @@ public class Familiar extends Instituicao {
 	// Método que utiliza metodo da classe Instituição para criar um objeto do tipo:
 	// (Corporação > Instituição > Familiar)
 	// Não pode ser instaciado direto na Main
-	public String fundarCorporacaoInstituicaoFamiliar() throws Exception {
+	public String fundarCorporacaoInstituicaoFamiliar(){
 		fundarCorporacaoInstituicao();
 
 		Scanner scan = new Scanner(System.in);
@@ -61,11 +61,11 @@ public class Familiar extends Instituicao {
 	}
 
 	// Método de input para ler arquivos CSV
-	public void inputCorporacaoInstituicaoFamiliar() throws IOException, TratamentoException {
-		List<Familiar> list = new ArrayList<Familiar>();
-		String path = "C:\\dev\\csvArchives\\Insituicao\\CorporacaoInstituicaoFamiliar.txt";
+	public void inputCorporacaoInstituicaoFamiliar() throws IOException{
+		List<Familiar> list = new ArrayList<>();
+		String path = "src\\br\\com\\magna\\magnacorps\\arquivoscsv\\Insituicao\\CorporacaoInstituicaoFamiliar.txt";
 		// Criando reader e utilizando padrão UTF-8
-		try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), "UTF-8"))) {
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), StandardCharsets.UTF_8))) {
 			String line = br.readLine();
 
 			// Lê cada linha e adciona na list
@@ -84,8 +84,8 @@ public class Familiar extends Instituicao {
 				String fundador = vect[9];
 				String diretor = vect[10];
 				String sede = vect[11];
-				String familia = vect[12];
-				String presidente = vect[13];
+				familia = vect[12];
+				presidente = vect[13];
 
 				Familiar familiar = new Familiar(nome, nomeFantasia, cnpj, numFuncionarios, faturamento, getPorte(),
 						tipo, multinacional, finsLucrativos, fundador, diretor, sede, familia, presidente);
@@ -97,23 +97,23 @@ public class Familiar extends Instituicao {
 			// loop que imprima linha a linha utilizando
 			System.out.println("Corparação Instituição Familiar: \n");
 
-			if (list.isEmpty() != true) {
+			if (!list.isEmpty()) {
 				for (Familiar f : list) {
 					System.out.println(f + "\n");
 				}
 			} else {
-				throw new TratamentoException("A lista não contém nenhuma corporação cadastrada");
+				System.out.println("A lista não contém nenhuma corporação cadastrada");
 			}
 
 		} catch (IOException e) {
-			throw new TratamentoException("Erro ao criar lista");
+			throw new NullPointerException();
 		}
 	}
 
 	// Output para escrita dos objetos no CSV
-	public void outputCorporacaoInstituicaoFamiliar() throws Exception {
-		String path = "C:\\dev\\csvArchives\\Insituicao\\CorporacaoInstituicaoFamiliar.txt";
-		List<Familiar> list = new ArrayList<Familiar>();
+	public void outputCorporacaoInstituicaoFamiliar() {
+		String path = "src\\br\\com\\magna\\magnacorps\\arquivoscsv\\Insituicao\\CorporacaoInstituicaoFamiliar.txt";
+		List<Familiar> list = new ArrayList<>();
 
 		Familiar familiar = new Familiar(familia, familia, familia, getNumFuncionarios(), getFaturamento(), porte,
 				familia, getMultinacional(), getFinsLucrativos(), familia, familia, familia, familia, presidente);
@@ -121,57 +121,55 @@ public class Familiar extends Instituicao {
 		list.add(familiar);
 
 		try (BufferedWriter out = new BufferedWriter(
-				new OutputStreamWriter(new FileOutputStream(path, true), "UTF-8"))) {
+				new OutputStreamWriter(new FileOutputStream(path, true), StandardCharsets.UTF_8))) {
 
-			for (Familiar familia : list) {
-				out.append(familia.getNome());
+			for (Familiar familiarList : list) {
+				out.append(familiarList.getNome());
 				out.append(',');
 
-				out.append(familia.getNomeFantasia());
+				out.append(familiarList.getNomeFantasia());
 				out.append(',');
 
-				out.append(familia.getCnpj());
+				out.append(familiarList.getCnpj());
 				out.append(',');
 
-				out.append(Integer.toString(familia.getNumFuncionarios()));
+				out.append(Integer.toString(familiarList.getNumFuncionarios()));
 				out.append(',');
 
-				out.append(Double.toString(familia.getFaturamento()));
+				out.append(Double.toString(familiarList.getFaturamento()));
 				out.append(',');
 
 				out.append(getPorte().toString());
 				out.append(',');
 
-				out.append(familia.getTipo());
+				out.append(familiarList.getTipo());
 				out.append(',');
 
-				out.append(Boolean.toString(familia.getMultinacional()));
+				out.append(Boolean.toString(familiarList.getMultinacional()));
 				out.append(',');
 
-				out.append(Boolean.toString(familia.getFinsLucrativos()));
+				out.append(Boolean.toString(familiarList.getFinsLucrativos()));
 				out.append(',');
 
-				out.append(familia.getFundador());
+				out.append(familiarList.getFundador());
 				out.append(',');
 
-				out.append(familia.getDiretor());
+				out.append(familiarList.getDiretor());
 				out.append(',');
 
-				out.append(familia.getSede());
+				out.append(familiarList.getSede());
 				out.append(',');
 
-				out.append(familia.getFamilia());
+				out.append(familiarList.getFamilia());
 				out.append(',');
 
-				out.append(familia.getPresidente());
+				out.append(familiarList.getPresidente());
 				out.append(',');
 				out.append('\n');
 			}
 			out.flush();
-			out.close();
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

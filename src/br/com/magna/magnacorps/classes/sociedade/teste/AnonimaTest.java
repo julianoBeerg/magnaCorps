@@ -2,6 +2,8 @@ package br.com.magna.magnacorps.classes.sociedade.teste;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -25,9 +27,9 @@ public class AnonimaTest {
 	}
 
 	@Test
-	public void verificaInputCorporacaoInstituicaoSimples() throws Exception {
-		List<Simples> list = new ArrayList<Simples>();
-		String path = "C:\\dev\\csvArchives\\Insituicao\\CorporacaoSociedadeSimples.txt";
+	public void verificaInputCorporacaoInstituicaoSimples() {
+		List<Simples> list = new ArrayList<>();
+		String path = "src\\br\\com\\magna\\magnacorps\\arquivoscsv\\Sociedade\\CorporacaoSociedadeAnonima.txt";
 
 		Simples simples = new Simples(path, path, path, null, null, null, path, null, null, path, null, null, path);
 
@@ -36,9 +38,9 @@ public class AnonimaTest {
 	}
 
 	@Test
-	public void verificaOutputCorporacaoSociedadeAnonima() throws Exception {
-		List<Anonima> list = new ArrayList<Anonima>();
-		String path = "C:\\dev\\csvArchives\\Insituicao\\CorporacaoSociedadeAnonima.txt";
+	public void verificaOutputCorporacaoSociedadeAnonima() throws IOException {
+		List<Anonima> list = new ArrayList<>();
+		String path = "src\\br\\com\\magna\\magnacorps\\arquivoscsv\\Sociedade\\CorporacaoSociedadeAnonima.txt";
 
 		Anonima anonima = new Anonima(path, path, path, 0, 0.0, null, path, null, null, path, null);
 

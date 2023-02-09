@@ -7,12 +7,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import br.com.magna.magnacorps.interfaces.Porte;
-import br.com.magna.magnacorps.main.TratamentoException;
 
 public class Governamental extends Instituicao {
 
@@ -32,8 +32,7 @@ public class Governamental extends Instituicao {
 	// Método que utiliza metodo da classe Instituição para criar um objeto do tipo:
 	// (Corporação > Instituição > Familiar)
 	// Não pode ser instaciado direto na Main
-	@SuppressWarnings("resource")
-	public String fundarCorporacaoInstituicaoGovernamental() throws Exception, TratamentoException {
+	public String fundarCorporacaoInstituicaoGovernamental() {
 		fundarCorporacaoInstituicao();
 
 		Scanner scan = new Scanner(System.in);
@@ -45,7 +44,8 @@ public class Governamental extends Instituicao {
 		} else if (verifica.contains("NÃO") || verifica.contains("NAO")) {
 			federal = false;
 		} else {
-			throw new TratamentoException("Preenche novamente com um valor válido !");
+			System.out.println("Prencha Novamente");
+			scan.close();
 		}
 
 		System.out.print("Digite a area de atuação: ");
@@ -69,13 +69,13 @@ public class Governamental extends Instituicao {
 	}
 
 	// Método de input para ler arquivos CSV
-	public void inputCorporacaoInstituicaoGovernamental() throws IOException, TratamentoException {
-		List<Governamental> list = new ArrayList<Governamental>();
+	public void inputCorporacaoInstituicaoGovernamental() throws IOException {
+		List<Governamental> list = new ArrayList<>();
 
-		String path = "C:\\dev\\csvArchives\\Insituicao\\CorporacaoInstituicaoGovernamental.txt";
+		String path = "src\\br\\com\\magna\\magnacorps\\arquivoscsv\\Insituicao\\CorporacaoInstituicaoGovernamental.txt";
 
 		// Criando reader e utilizando padrão UTF-8
-		try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), "UTF-8"))) {
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), StandardCharsets.UTF_8))) {
 			String line = br.readLine();
 
 			// Lê cada linha e adciona na list
@@ -94,8 +94,8 @@ public class Governamental extends Instituicao {
 				String fundador = vect[9];
 				String diretor = vect[10];
 				String sede = vect[11];
-				Boolean federal = Boolean.parseBoolean(vect[12]);
-				String areaAtuacao = vect[13];
+				federal = Boolean.parseBoolean(vect[12]);
+				areaAtuacao = vect[13];
 
 				Governamental governamental = new Governamental(nome, nomeFantasia, cnpj, numFuncionarios, faturamento,
 						getPorte(), tipo, multinacional, finsLucrativos, fundador, diretor, sede, federal, areaAtuacao);
@@ -107,24 +107,24 @@ public class Governamental extends Instituicao {
 			// loop que imprima linha a linha utilizando
 			System.out.println("Corparação Instituição Governamental: \n");
 
-			if (list.isEmpty() != true) {
+			if (!list.isEmpty()) {
 				for (Governamental f : list) {
 					System.out.println(f + "\n");
 				}
 			} else {
-				throw new TratamentoException("A lista não contém nenhuma corporação cadastrada");
+				System.out.println("A lista não contém nenhuma corporação cadastrada");
 			}
 
 		} catch (IOException e) {
-			throw new TratamentoException("Erro ao criar lista");
+			throw new NullPointerException();
 		}
 	}
 
 	// Output para escrita dos objetos no CSV
-	public void outputCorporacaoInstituicaoGovernamental() throws Exception {
-		List<Governamental> list = new ArrayList<Governamental>();
+	public void outputCorporacaoInstituicaoGovernamental() {
+		List<Governamental> list = new ArrayList<>();
 
-		String path = "C:\\dev\\csvArchives\\Insituicao\\CorporacaoInstituicaoGovernamental.txt";
+		String path = "src\\br\\com\\magna\\magnacorps\\arquivoscsv\\Insituicao\\CorporacaoInstituicaoGovernamental.txt";
 
 		Governamental governamental1 = new Governamental(path, path, path, numFuncionarios, getFaturamento(), porte,
 				path, federal, federal, path, path, path, federal, path);
@@ -134,7 +134,7 @@ public class Governamental extends Instituicao {
 		list.add(governamental1);
 
 		try (BufferedWriter out = new BufferedWriter(
-				new OutputStreamWriter(new FileOutputStream(path, true), "UTF-8"))) {
+				new OutputStreamWriter(new FileOutputStream(path, true), StandardCharsets.UTF_8))) {
 
 			for (Governamental governamental : list) {
 				out.append(governamental.getNome());
@@ -181,10 +181,9 @@ public class Governamental extends Instituicao {
 				out.append('\n');
 			}
 			out.flush();
-			out.close();
+			
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

@@ -7,12 +7,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import br.com.magna.magnacorps.interfaces.Porte;
-import br.com.magna.magnacorps.main.TratamentoException;
 
 public class LimitadaColetiva extends Sociedade {
 
@@ -31,7 +31,7 @@ public class LimitadaColetiva extends Sociedade {
 	// Método que utiliza metodo da classe Instituição para criar um objeto do tipo:
 	// (Corporação > Instituição > Familiar)
 	// Não pode ser instaciado direto na Main
-	public String fundarCorporacaoSociedadeLimitadaColetiva() throws Exception, TratamentoException {
+	public String fundarCorporacaoSociedadeLimitadaColetiva(){
 		fundarCorporacaoSociedade();
 		Scanner scan = new Scanner(System.in);
 
@@ -59,13 +59,13 @@ public class LimitadaColetiva extends Sociedade {
 	}
 
 	// Método de input para ler arquivos CSV
-	public void inputCorporacaoSociedadeLimitadaColetiva() throws IOException, TratamentoException {
-		List<LimitadaColetiva> list = new ArrayList<LimitadaColetiva>();
+	public void inputCorporacaoSociedadeLimitadaColetiva() throws IOException {
+		List<LimitadaColetiva> list = new ArrayList<>();
 
-		String path = "C:\\dev\\csvArchives\\Sociedade\\CorporacaoSociedadeLimitadaColetiva.txt";
+		String path = "src\\br\\com\\magna\\magnacorps\\arquivoscsv\\Sociedade\\CorporacaoSociedadeLimitadaColetiva.txt";
 
 		// Criando reader e utilizando padrão UTF-8
-		try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), "UTF-8"))) {
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), StandardCharsets.UTF_8))) {
 			String line = br.readLine();
 
 			// Lê cada linha e adciona na list
@@ -83,8 +83,8 @@ public class LimitadaColetiva extends Sociedade {
 				Boolean finsLucrativos = Boolean.parseBoolean(vect[8]);
 				String sede = vect[9];
 				Integer sociosQuant = Integer.parseInt(vect[10]);
-				String area = vect[11];
-				String administrador = vect[12];
+				area = vect[11];
+				administrador = vect[12];
 
 				LimitadaColetiva limitadaColetiva = new LimitadaColetiva(nome, nomeFantasia, cnpj, numFuncionarios,
 						faturamento, getPorte(), tipo, multinacional, finsLucrativos, sede, sociosQuant, area,
@@ -96,24 +96,24 @@ public class LimitadaColetiva extends Sociedade {
 			// loop que imprima linha a linha utilizando
 			System.out.println("Corparação Sociedade Limitada/Coletiva: \n");
 
-			if (list.isEmpty() != true) {
+			if (!list.isEmpty()) {
 				for (LimitadaColetiva f : list) {
 					System.out.println(f + "\n");
 				}
 			} else {
-				throw new TratamentoException("A lista não contém nenhuma corporação cadastrada");
+				System.out.println("A lista não contém nenhuma corporação cadastrada");
 			}
 
 		} catch (IOException e) {
-			throw new TratamentoException("Erro ao criar lista");
+			throw new NullPointerException();
 		}
 	}
 
 	// Output para escrita dos objetos no CSV
-	public void outputCorporacaoSociedadeLimitadaColetiva() throws Exception {
-		List<LimitadaColetiva> list = new ArrayList<LimitadaColetiva>();
+	public void outputCorporacaoSociedadeLimitadaColetiva() {
+		List<LimitadaColetiva> list = new ArrayList<>();
 
-		String path = "C:\\dev\\csvArchives\\Sociedade\\CorporacaoSociedadeLimitadaColetiva.txt";
+		String path = "src\\br\\com\\magna\\magnacorps\\arquivoscsv\\Sociedade\\CorporacaoSociedadeLimitadaColetiva.txt";
 
 		LimitadaColetiva limitadaColetiva1 = new LimitadaColetiva(path, path, path, numFuncionarios, getFaturamento(),
 				porte, path, getMultinacional(), getFinsLucrativos(), path, sociosQuant, path, path);
@@ -123,7 +123,7 @@ public class LimitadaColetiva extends Sociedade {
 		list.add(limitadaColetiva1);
 
 		try (BufferedWriter out = new BufferedWriter(
-				new OutputStreamWriter(new FileOutputStream(path, true), "UTF-8"))) {
+				new OutputStreamWriter(new FileOutputStream(path, true), StandardCharsets.UTF_8))) {
 
 			for (LimitadaColetiva limitadaColetiva : list) {
 				out.append(limitadaColetiva.getNome());
@@ -167,10 +167,9 @@ public class LimitadaColetiva extends Sociedade {
 				out.append('\n');
 			}
 			out.flush();
-			out.close();
+
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

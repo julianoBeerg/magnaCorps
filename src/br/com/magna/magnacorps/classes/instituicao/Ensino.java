@@ -7,12 +7,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import br.com.magna.magnacorps.interfaces.Porte;
-import br.com.magna.magnacorps.main.TratamentoException;
 
 public class Ensino extends Instituicao {
 
@@ -32,20 +32,16 @@ public class Ensino extends Instituicao {
 	// Método que utiliza metodo da classe Instituição para criar um objeto do tipo:
 	// (Corporação > Instituição > Familiar)
 	// Não pode ser instaciado direto na Main
-	@SuppressWarnings("resource")
-	public String fundarCorporacaoInstituicaoEnsino() throws Exception, TratamentoException {
+
+	public String fundarCorporacaoInstituicaoEnsino() {
 		fundarCorporacaoInstituicao();
 		Scanner scan = new Scanner(System.in);
 
 		System.out.print("Digite o grau que a instituição ensina: ");
 		this.grau = scan.nextLine();
 
-		try {
-			System.out.print("Digite a quantidade de Alunos: ");
-			this.quantAlunos = scan.nextInt();
-		} catch (Exception e) {
-			throw new TratamentoException("O Tipo deve ser númerico");
-		}
+		System.out.print("Digite a quantidade de Alunos: ");
+		this.quantAlunos = scan.nextInt();
 
 		System.out.println("\nCadastro Realizado com Sucesso !\n\n");
 
@@ -65,13 +61,14 @@ public class Ensino extends Instituicao {
 	}
 
 	// Método de input para ler arquivos CSV
-	public void inputCorporacaoInstituicaoEnsino() throws IOException, TratamentoException {
-		List<Ensino> list = new ArrayList<Ensino>();
+	public void inputCorporacaoInstituicaoEnsino() throws IOException{
+		List<Ensino> list = new ArrayList<>();
 
-		String path = "C:\\dev\\csvArchives\\Insituicao\\CorporacaoInstituicaoEnsino.txt";
+		String path = "src\\br\\com\\magna\\magnacorps\\arquivoscsv\\Insituicao\\CorporacaoInstituicaoEnsino.txt";
 
 		// Criando reader e utilizando padrão UTF-8
-		try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), "UTF-8"))) {
+		try (BufferedReader br = new BufferedReader(
+				new InputStreamReader(new FileInputStream(path), StandardCharsets.UTF_8))) {
 			String line = br.readLine();
 
 			// Lê cada linha e adciona na list
@@ -90,8 +87,8 @@ public class Ensino extends Instituicao {
 				String fundador = vect[9];
 				String diretor = vect[10];
 				String sede = vect[11];
-				String grau = vect[12];
-				Integer quantAlunos = Integer.parseInt(vect[13]);
+				grau = vect[12];
+				quantAlunos = Integer.parseInt(vect[13]);
 
 				Ensino ensino = new Ensino(nome, nomeFantasia, cnpj, numFuncionarios, faturamento, getPorte(), tipo,
 						multinacional, finsLucrativos, fundador, diretor, sede, grau, quantAlunos);
@@ -103,23 +100,23 @@ public class Ensino extends Instituicao {
 			// loop que imprima linha a linha utilizando
 			System.out.println("Corparação Instituição Ensino: \n");
 
-			if (list.isEmpty() != true) {
+			if (!list.isEmpty()) {
 				for (Ensino f : list) {
 					System.out.println(f + "\n");
 				}
 			} else {
-				throw new TratamentoException("A lista não contém nenhuma corporação cadastrada");
+				System.out.println("A lista não contém nenhuma corporação cadastrada");
 			}
 
 		} catch (IOException e) {
-			throw new TratamentoException("Erro ao criar lista");
+			throw new NullPointerException();
 		}
 	}
 
 	// Output para escrita dos objetos no CSV
-	public void outputCorporacaoInstituicaoEnsino() throws Exception {
-		String path = "C:\\dev\\csvArchives\\Insituicao\\CorporacaoInstituicaoEnsino.txt";
-		List<Ensino> list = new ArrayList<Ensino>();
+	public void outputCorporacaoInstituicaoEnsino() {
+		String path = "src\\br\\com\\magna\\magnacorps\\arquivoscsv\\Insituicao\\CorporacaoInstituicaoEnsino.txt";
+		List<Ensino> list = new ArrayList<>();
 
 		Ensino ensino1 = new Ensino(path, path, path, quantAlunos, getFaturamento(), porte, path, getMultinacional(),
 				getFinsLucrativos(), path, path, path, path, quantAlunos);
@@ -129,7 +126,7 @@ public class Ensino extends Instituicao {
 		list.add(ensino1);
 
 		try (BufferedWriter out = new BufferedWriter(
-				new OutputStreamWriter(new FileOutputStream(path, true), "UTF-8"))) {
+				new OutputStreamWriter(new FileOutputStream(path, true), StandardCharsets.UTF_8))) {
 
 			for (Ensino ensino : list) {
 				out.append(ensino.getNome());
@@ -176,10 +173,8 @@ public class Ensino extends Instituicao {
 				out.append('\n');
 			}
 			out.flush();
-			out.close();
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
